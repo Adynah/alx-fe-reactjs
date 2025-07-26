@@ -3,12 +3,12 @@ import Home from './components/Home';
 import About from './components/About';
 import Services from './components/Services';
 import Contact from './components/Contact';
-import NavBar from './components/NavBar';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

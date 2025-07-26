@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function NavBar() {
+function Navbar() {
     const navStyle = {
     backgroundColor: '#0d47a1',
     padding: '15px',
@@ -35,3 +35,5 @@ function NavBar() {
     </nav>
   );
 }
+
+export default Navbar;
