@@ -8,7 +8,7 @@ const EditRecipeForm = ({ recipe }) => {
   const recipes = useRecipeStore((state) => state.recipes);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    event.preventDefault();
 
     const updated = recipes.map((r) =>
       r.id === recipe.id ? { ...r, title, description } : r
