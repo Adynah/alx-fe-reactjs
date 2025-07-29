@@ -1,7 +1,12 @@
 import { create } from 'zustand';
 
-const useRecipeStore = create((set) => ({
+const useRecipeStore = create((set, get) => ({
   recipes: [],
+  searchTerm: '',
+  filteredRecipes: [],
+  ingredientFilter: '',
+  timeFilter: '',
+
 
   addRecipe: (newRecipe) =>
     set((state) => ({
@@ -21,7 +26,40 @@ const useRecipeStore = create((set) => ({
     set((state) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== id),
     })),
+
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+    get().filterRecipes();
+  },
+
+  setIngredientFilter: (ingredient) => {
+    set({ ingredientFilter: ingredient });
+    get().filterRecipes();
+  },
+
+  setTimeFilter: (time) => {
+    set({ timeFilter: time });
+    get().filterRecipes();
+  },
+
+  filterRecipes: () => {
+  const { recipes, searchTerm, ingredientFilter, timeFilter } = get();
+  const filtered = recipes.filter((recipe) => {
+    const matchesTitle = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesIngredient = ingredientFilter
+      ? recipe.ingredients?.join(', ').toLowerCase().includes(ingredientFilter.toLowerCase())
+      : true;
+
+    const matchesTime = timeFilter
+      ? recipe.time && parseInt(recipe.time) <= parseInt(timeFilter)
+      : true;
+
+    return matchesTitle && matchesIngredient && matchesTime;
+  });
+
+  set({ filteredRecipes: filtered });
+  },
 }));
 
 export default useRecipeStore;
-

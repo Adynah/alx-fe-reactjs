@@ -7,7 +7,7 @@ const EditRecipeForm = ({ recipe }) => {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
   const recipes = useRecipeStore((state) => state.recipes);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const updated = recipes.map((r) =>
@@ -23,13 +23,13 @@ const EditRecipeForm = ({ recipe }) => {
       <input
         type="text"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
         placeholder="Title"
         style={{ display: 'block', margin: '0.5rem 0' }}
       />
       <textarea
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(event) => setDescription(event.target.value)}
         placeholder="Description"
         style={{ display: 'block', margin: '0.5rem 0' }}
       />

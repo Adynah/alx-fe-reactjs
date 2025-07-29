@@ -1,10 +1,12 @@
+import { useParams } from 'react-router-dom';
 import useRecipeStore from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 
 const RecipeDetails = ({ recipeId }) => {
+  const { id } = useParams();
   const recipe = useRecipeStore((state) =>
-    state.recipes.find((recipe) => recipe.id === recipeId)
+    state.recipes.find((recipe) => String(recipe.id) === String(id))
   );
   
   if (!recipe) {
@@ -19,7 +21,7 @@ const RecipeDetails = ({ recipeId }) => {
       <EditRecipeForm recipe={recipe} />
 
       <h3>Delete Recipe</h3>
-      <DeleteRecipeButton recipeId={recipeId} />
+      <DeleteRecipeButton recipeId={recipe.id} />
     </div>
   );
 };
