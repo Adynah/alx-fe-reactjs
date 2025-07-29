@@ -6,6 +6,9 @@ import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
+import RecommendationsList from './components/RecommendationsList';
+import FavoritesList from './components/FavoritesList';
+import Navbar from './components/Navbar';
 
 
 function App() {
@@ -20,6 +23,7 @@ function App() {
       <div className="App">
         <h1>My Recipe Book</h1>
         <SearchBar />
+        <Navbar />
 
         <Routes>
           <Route
@@ -33,6 +37,8 @@ function App() {
           />
           <Route path="/" element={<Home />} />
           <Route path="/recipe-details/:id" element={<RecipeDetails />} />
+          <Route path="/recommendations" element={<RecommendationsList />} />
+          <Route path="/favorites" element={<FavoritesList />} />
         </Routes>
       </div>
     </BrowserRouter>

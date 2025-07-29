@@ -6,10 +6,16 @@ const RecipeList = () => {
   const recipes = useRecipeStore(state => state.filteredRecipes);
   const searchTerm = useRecipeStore(state => state.searchTerm);
   const filterRecipes = useRecipeStore(state => state.filterRecipes);
+  const addFavorite = useRecipeStore(state => state.addFavorite);
+  const favorites = useRecipeStore(state => state.favorites);
+  const generateRecommendations = useRecipeStore(state => state.generateRecommendations);
+
 
   useEffect(() => {
     filterRecipes();
   }, [searchTerm, filterRecipes]);
+
+  const isFavorite = (id) => favorites.includes(id);
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -22,6 +28,17 @@ const RecipeList = () => {
               <Link to={`/recipe-details/${recipe.id}`} style={{ marginLeft: '10px' }}>
                 View Details
               </Link>
+               {!isFavorite(recipe.id) && (
+                <button
+                  onClick={() => addFavorite(recipe.id)}
+                  style={{ marginRight: '10px' }}
+                >
+                  Add to Favorites
+                </button>
+              )}
+              <button onClick={generateRecommendations}>
+                Recommend Similar
+              </button>
             </li>
           ))
         ) : (
