@@ -7,7 +7,7 @@ const RecommendationsList = () => {
 
   useEffect(() => {
     generateRecommendations();
-  }, []);
+  }, []);    // Shows Items Tailored For Each User
 
   return (
     <div>
