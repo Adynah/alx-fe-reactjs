@@ -7,7 +7,7 @@ const FavoritesList = () => {
 
   const favoriteRecipes = favorites
     .map(id => recipes.find(recipe => recipe.id === id))
-    .filter(Boolean);
+    .filter(Boolean);   // Saves Bookmark User Items
 
   return (
     <div>
