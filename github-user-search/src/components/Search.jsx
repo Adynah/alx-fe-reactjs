@@ -3,7 +3,10 @@ import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState(""); // Input value
-  const [user, setUser] = useState(null);       // API result
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
+  const [users, setUsers] = useState([]); // store multiple results
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -11,13 +14,17 @@ function Search() {
     e.preventDefault(); // Stop page refresh
     setLoading(true);
     setError("");
-    setUser(null);
+    setResult([]);
 
     try {
-      const data = await fetchUserData(username);
-      setUser(data);
+      const data = await fetchUserData(username, location, minRepos);
+      if (users.length === 0) {
+        setError("Looks like we cant find the user");
+      } else {
+        setResults(users);
+      }
     } catch (err) {
-      setError("Looks like we cant find the user");
+      setError("Error fetching data");
     } finally {
       setLoading(false);
     }
@@ -32,28 +39,47 @@ function Search() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          style={{ marginLeft: "10px" }}
+        />
+        <input
+          type="number"
+          placeholder="Min Repositories"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          style={{ marginLeft: "10px" }}
+        />
         <button type="submit">Search</button>
       </form>
 
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {user && (
+      {/* Results */}
+      {users.length > 0 && (
         <div style={{ marginTop: "20px" }}>
-          <img
-            src={user.avatar_url}
-            alt={user.login}
-            width="100"
-            style={{ borderRadius: "50%" }}
-          />
-          <h2>{user.name || user.login}</h2>
+          {users.map((user) => (
+            <div key={user.id} style={{ marginBottom: "20px" }}>
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+                width="100"
+                style={{ borderRadius: "50%" }}
+              />
+          <h2>{user.login}</h2>
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
             View Profile
-          </a>
+              </a>
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
 }
-
+ 
 export default Search
