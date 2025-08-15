@@ -19,10 +19,10 @@ export async function fetchUserData(username, location, minRepos) {
     if (location) query += `location:${location} `;
     if (minRepos) query += `repos:>=${minRepos}`;
 
-    const response = await axios.get(`https://api.github.com/users/${username}`, {
+    const response = await axios.get(`https://api.github.com/search/users?q=${encodeURIComponent(query)}`, {
       headers: apiKey ? { Authorization: `token ${apiKey}` } : {}
     });
-    return response.data.items;
+    return response.data.items; // returns array of users
   } catch (error) {
     throw new Error("User not found");
   }
