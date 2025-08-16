@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { fetchUserData } from "../services/githubService";
+import UserCard from "./UserCard";
 
 function Search() {
   const [username, setUsername] = useState(""); // Input value
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]); // store multiple results
-  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -14,14 +14,14 @@ function Search() {
     e.preventDefault(); // Stop page refresh
     setLoading(true);
     setError("");
-    setResult([]);
+    setUsers([]);
 
     try {
       const data = await fetchUserData(username, location, minRepos);
-      if (users.length === 0) {
+      if (data.length === 0) {
         setError("Looks like we cant find the user");
       } else {
-        setResults(users);
+        setUsers(data);  // update users only if data exists
       }
     } catch (err) {
       setError("Error fetching data");
@@ -63,18 +63,7 @@ function Search() {
       {users.length > 0 && (
         <div style={{ marginTop: "20px" }}>
           {users.map((user) => (
-            <div key={user.id} style={{ marginBottom: "20px" }}>
-              <img
-                src={user.avatar_url}
-                alt={user.login}
-                width="100"
-                style={{ borderRadius: "50%" }}
-              />
-          <h2>{user.login}</h2>
-          <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-            View Profile
-              </a>
-            </div>
+            <UserCard key={user.id} user={user} />
           ))}
         </div>
       )}
