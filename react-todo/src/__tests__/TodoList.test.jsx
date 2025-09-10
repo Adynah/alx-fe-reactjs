@@ -1,14 +1,15 @@
+import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TodoList from "../components/TodoList";
 
 describe("TodoList Component", () => {
-    test("renders initial todos", () => {
+    it("renders initial todo items", () => {
         render(<TodoList />);
         expect(screen.getByText("Learn React")).toBeInTheDocument();
         expect(screen.getByText("Write Tests")).toBeInTheDocument();
     });
 
-    test("adds a new todo", () => {
+    it("allows adding a new todo", () => {
         render(<TodoList />);
         const input = screen.getByPlaceholderText("Add a new todo");
         const addButton = screen.getByText("Add");
@@ -20,7 +21,7 @@ describe("TodoList Component", () => {
         expect(input.value).toBe("");
     });
 
-    test("toggles a todo's completed status", () => {
+    it("toggles a todo's completed state when clicked", () => {
         render(<TodoList />);
         const todo = screen.getByText("Learn React");
 
@@ -33,12 +34,14 @@ describe("TodoList Component", () => {
         expect(todo).not.toHaveClass("line-through");
     });
 
-    test("deletes a todo", () => {
+    it("deletes a todo when delete button is clicked", () => {
         render(<TodoList />);
         const todo = screen.getByText("Write Tests");
-        const deleteButton = screen.getAllByText("Delete")[1];
+        const deleteButtons = screen.getAllByText("Delete");
+        const deleteButton = deleteButtons[1]; // second todo
 
         fireEvent.click(deleteButton);
         expect(todo).not.toBeInTheDocument();
     });
 });
+
