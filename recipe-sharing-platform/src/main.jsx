@@ -8,3 +8,18 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/recipe/:id",
+    element: <RecipeDetail />,
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}

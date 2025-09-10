@@ -4,11 +4,31 @@
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
     "image": "https://via.placeholder.com/150"
+    
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
     "image": "https://via.placeholder.com/150"
+  },
+
+  {
+    "id": 3,
+    "title": "Spaghetti Bolognese",
+    "image": "/images/spaghetti.jpg",
+    "description": "A classic Italian pasta dish with rich tomato and meat sauce.",
+    "ingredients": ["200g spaghetti", "100g minced beef", "1 onion", "2 garlic cloves", "Tomato sauce"],
+    "instructions": "Boil pasta. Fry onion and garlic. Add beef and cook. Stir in tomato sauce. Combine with pasta."
+  },
+
+
+  {
+    "id": 4,
+    "title": "Chicken Curry",
+    "image": "/images/curry.jpg",
+    "description": "A flavorful curry made with tender chicken and spices.",
+    "ingredients": ["500g chicken", "2 onions", "3 tomatoes", "Curry powder", "Coconut milk"],
+    "instructions": "Sauté onions, add tomatoes and curry powder. Add chicken and cook until brown. Pour coconut milk and simmer."
   }
 ]
