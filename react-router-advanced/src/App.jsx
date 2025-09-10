@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Profile from "./components/Profile";
@@ -9,7 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Home />} />
@@ -27,7 +27,7 @@ function App() {
         {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
